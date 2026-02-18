@@ -1,0 +1,134 @@
+Prereq : Groq Api key should be generated and updated in postman collect api .
+
+Api  end point  : https://api.groq.com/openai/v1/chat/completions
+
+
+Format of the request payload :
+ICEPOT Framework
+
+{
+  "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+  "messages": [
+    {
+         "role": "system", - instruction
+         "content": ""
+    },
+     {
+         "role": "user", - context
+         "content": ""
+    },
+     {
+         "role": "assistant", - output
+         "content": ""
+    }]}
+
+1.Accesseblity :
+output :
+                "content": "- WCAG_Level: A\n- WCAG_Criterion: 1.1.1 Non-text Content \n- Observation: The image with url \"http://leaftaps.com/opentaps_images/opentaps_logo.png\" does not have a text alternative.\n- Compliance_Status: Non-Compliant\n- Evidence: image url: http://leaftaps.com/opentaps_images/opentaps_logo.png\n\n- WCAG_Level: A\n- WCAG_Criterion: 1.3.1 Info and Relationships \n- Observation: The StaticText \"Username\" and \"Password\" are not associated with their corresponding textboxes.\n- Compliance_Status: Non-Compliant\n- Evidence: paragraph > LabelText > StaticText \"Username\" and textbox \"Username\", paragraph > LabelText > StaticText \"Password\" and textbox \"Password\"\n\n- WCAG_Level: A\n- WCAG_Criterion: 1.3.2 Meaningful Sequence \n- Observation: The order of the elements in the Accessibility DOM seems logical.\n- Compliance_Status: Compliant\n- Evidence: The provided Accessibility DOM\n\n- WCAG_Level: A\n- WCAG_Criterion: 2.1.1 Keyboard Navigation \n- Observation: The textbox \"Username\", textbox \"Password\" and button \"Login\" are focusable.\n- Compliance_Status: Compliant\n- Evidence: textbox \"Username\" > focusable: true, textbox \"Password\" > focusable: true, button \"Login\" > focusable: true\n\n- WCAG_Level: A\n- WCAG_Criterion: 3.1.1 Language of Page \n- Observation: The language of the page is not specified.\n- Compliance_Status: Potential Risk\n- Evidence: The provided Accessibility DOM\n\n- WCAG_Level: AA\n- WCAG_Criterion: 1.4.7 Low or No Background \n- Observation: There is no information about the background and text color.\n- Compliance_Status: Potential Risk\n- Evidence: The provided Accessibility DOM\n\n- WCAG_Level: AA\n- WCAG_Criterion: 2.4.6 Headings and Labels \n- Observation: The labels \"Username\" and \"Password\" are provided but not programmatically associated.\n- Compliance_Status: Non-Compliant\n- Evidence: paragraph > LabelText > StaticText \"Username\" and textbox \"Username\", paragraph > LabelText > StaticText \"Password\" and textbox \"Password\"\n\n- WCAG_Level: AAA\n- WCAG_Criterion: 1.4.10 Content on Hover or Focus \n- Observation: There is no information about the content on hover or focus.\n- Compliance_Status: Potential Risk\n- Evidence: The provided Accessibility DOM"
+
+2. Stop Generating cases : STOP Param
+
+stop value given as 6 so its created 5 test cases 
+Here are the test cases derived from the provided User Story and Acceptance Criteria:
+
+TC_ID: 1
+Title: Record Doctor Activities - Valid Input
+Preconditions: The system is operational, and the user is logged in with the necessary permissions.
+Test Steps:
+Navigate to the doctor activities recording section.
+Enter valid doctor activity details (e.g., date, activity type, description).
+Submit the activity details.
+Test Data: Valid doctor activity details (date: 2023-04-01, activity type: Consultation, description: Patient consultation).
+Expected Result: The system successfully records the doctor activity and displays a confirmation message. Positive
+TC_ID: 2
+Title: Record Doctor Notes - Valid Input
+Preconditions: The system is operational, and the user is logged in with the necessary permissions.
+Test Steps:
+Navigate to the doctor notes recording section.
+Enter valid doctor note details (e.g., date, note type, description).
+Submit the note details.
+Test Data: Valid doctor note details (date: 2023-04-01, note type: Progress Note, description: Patient progress update).
+Expected Result: The system successfully records the doctor note and displays a confirmation message. Positive
+TC_ID: 3
+Title: Record Doctor Activities - Invalid Date
+Preconditions: The system is operational, and the user is logged in with the necessary permissions.
+Test Steps:
+Navigate to the doctor activities recording section.
+Enter invalid date for doctor activity details (e.g., date: 2023-13-01, activity type: Consultation, description: Patient consultation).
+Submit the activity details.
+Test Data: Invalid date for doctor activity details (date: 2023-13-01, activity type: Consultation, description: Patient consultation).
+Expected Result: The system displays an error message indicating that the date is invalid. Negative
+TC_ID: 4
+Title: Record Doctor Notes - Empty Description
+Preconditions: The system is operational, and the user is logged in with the necessary permissions.
+Test Steps:
+Navigate to the doctor notes recording section.
+Enter doctor note details with an empty description (e.g., date: 2023-04-01, note type: Progress Note, description: ).
+Submit the note details.
+Test Data: Doctor note details with an empty description (date: 2023-04-01, note type: Progress Note, description: ).
+Expected Result: The system displays an error message indicating that the description is required. Negative
+TC_ID: 5
+Title: View Recorded Doctor Activities
+Preconditions: The system is operational, and the user is logged in with the necessary permissions. There are recorded doctor activities.
+Test Steps:
+Navigate to the doctor activities section.
+Search or filter activities if available.
+View the list of recorded doctor activities.
+Test Data: Existing recorded doctor activities.
+Expected Result: The system displays a list of recorded doctor activities accurately. Positive
+
+3. Top_p param - Nucleaus sampling - how many next word the model can choose that can be controlled using top_p
+
+4. DOM to selenium code - llama 4 scout 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Set path to ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Open website
+        driver.get("your_website_url");
+
+        // Locate elements
+        WebElement companyNameInput = driver.findElement(By.name("companyName"));
+        WebElement lastNameInput = driver.findElement(By.name("lastName"));
+        WebElement firstNameInput = driver.findElement(By.name("firstName"));
+        WebElement submitButton = driver.findElement(By.className("smallSubmit"));
+
+        // Perform actions
+        companyNameInput.sendKeys("Company Name");
+        lastNameInput.sendKeys("Last Name");
+        firstNameInput.sendKeys("First Name");
+        submitButton.click();
+
+        // Close browser
+        driver.quit();
+    }
+}
+
+
+5. temperature param is used to control the creativity 
+
+6.websearch - the model used is groq/compound-mini 
+
+Latest news given using web search 
+Latest News:
+
+Nitish’s son Nishant all out in public before getting any role in the party
+
+Device theft at India AI Impact Summit: Delhi Police identify suspect
+
+Police launch new anti-drug drive across city colleges
+
+All 12 accused in Turkman Gate violence case get bail
+
+
