@@ -28,3 +28,18 @@ Claude 3 sonnet                 200k                        4k- 8k
 claude 3 opus                   200k                         4k-8k
 claude 3 haiku                  200k                             4k
 
+2.
+Moderation Model :
+
+Moderation Model is an Ai model is used to detect, classify and filter unsafe or harmfull content 
+
+
+in Groq - Safety GPT OSS 20B is the moderation model 
+
+
+Reasoning Model - GPT OSS 120B
+Speech to text - whisper large v3
+text to speech -  orpheus english
+text to text - GPT OSS 120 B
+Vision Model - llama  4 scout 
+Multilingal - Kimi k2
