@@ -1,0 +1,13 @@
+Schema changes given as a promt to geenrate a text cases :
+
+TC_ID,Category,Description,Validation_Level,Steps,Expected_Result
+TC-01,New Table - Client,"Verify 'client' table is created with columns: client_id (PK), name, workspace_ids",DB Level,Check table existence and column definitions using DESCRIBE/INFORMATION_SCHEMA,"Table exists with correct column names, data types, PK constraint on client_id"
+TC-02,New Table - Client,Verify client_id is Primary Key and NOT NULL,DB Level,Attempt to insert duplicate or NULL client_id,DB should reject duplicate or NULL values
+TC-03,New Table - Client Access,Verify 'client_access' table is created with proper foreign key reference to client table,DB Level,Check FK constraint between client_access.client_id and client.client_id,Foreign key constraint exists and enforces referential integrity
+TC-04,Existing Table - Add Column,Verify client_id column added to existing transactional table,DB Level,Check column existence and datatype in transactional table,client_id column exists with correct datatype and constraints
+TC-05,Existing Table - Data Integrity,Verify foreign key relationship between transactional_table.client_id and client.client_id,DB Level,Insert record with invalid client_id,Insertion should fail due to FK constraint
+TC-06,Application Level Validation,Verify application rejects creation of transaction without valid client_id,App Level,Call API/UI without client_id or with invalid client_id,Application returns validation error message
+TC-07,Backward Compatibility,Verify existing records in transactional table are handled correctly after adding client_id column,DB + App Level,Check default values or migration script behavior for old records,No data loss; existing records mapped or defaulted correctly
+TC-08,Performance Validation,Verify query performance after adding client_id and new relationships,DB Level,Run explain plan and compare query performance before and after change,No significant performance degradation; indexes created if required
+TC-09,Security Validation,Verify access control for new tables,DB + App Level,Check user roles and permissions for client and client_access tables,Only authorized roles can read/write data
+TC-10,Migration Validation,Verify migration/rollback scripts for schema changes,DB Level,Execute migration and rollback in lower environment,Schema applies and rolls back without errors
