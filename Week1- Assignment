@@ -1,0 +1,30 @@
+Context window :
+It is the total text that model can handle which includes input + output +history
+input+output <= context window
+
+Input Tokaen :
+
+input  prompt given to model
+
+output token:
+
+ouput which model gives as reposnse 
+
+
+open ai Models :
+Models                      Context window (tokens)          output token(tokens)
+GPT-40   -                      128k                            4k-16k                 
+GPT-4.1                          1M                                32k
+GPT 4 Turbo                     128k                              4k
+
+Qwen Model(Alibaba)
+Qwen2- 7B                    128k                                 8k
+Qwen2 -72B                   128k                                 8k
+Qwen1.5 -14B                32k- 128k                            4k-8k
+
+Claude Models(Anthropic)
+
+Claude 3 sonnet                 200k                        4k- 8k
+claude 3 opus                   200k                         4k-8k
+claude 3 haiku                  200k                             4k
+
