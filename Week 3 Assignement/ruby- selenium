@@ -1,0 +1,40 @@
+
+
+3. Vibe coding 
+require 'selenium-webdriver'
+
+class LoginPage
+  attr_reader :driver, :username_label, :username_input, :password_label, :password_input, :login_button
+
+  def initialize(driver)
+    @driver = driver
+    @username_label = driver.find_element(css: 'span.tabletext:nth-child(1)')
+    @username_input = driver.find_element(css: 'input[name="USERNAME"]')
+    @password_label = driver.find_element(css: 'span.tabletext:nth-child(2)')
+    @password_input = driver.find_element(css: 'input[name="PASSWORD"]')
+    @login_button = driver.find_element(css: 'input.loginButton')
+  end
+
+  def enter_username(username)
+    username_input.send_keys(username)
+  end
+
+  def enter_password(password)
+    password_input.send_keys(password)
+  end
+
+  def click_login_button
+    login_button.click
+  end
+
+  def get_username_label_text
+    username_label.text
+  end
+
+  def get_password_label_text
+    password_label.text
+  end
+end
+
+In my org we are using ruby with selenium 
+so i have given a prompt saying i need a page class with ruby slenium
